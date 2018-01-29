@@ -6,7 +6,7 @@ class LetterPicker extends Component {
 
     render() {
         return (
-            <Text style={{ fontSize: 11, fontWeight: 'bold' }}>
+            <Text style={{ fontSize: 11, fontWeight: 'bold', ...this.props.alphabetPickerStyle }}>
                 {this.props.letter}
             </Text>
         );
@@ -78,8 +78,8 @@ export default class AlphabetPicker extends Component {
 
     render() {
         const {alphabet} = this.state
-        this._letters = (
-            alphabet.map((letter) => <LetterPicker letter={letter} key={letter} />)
+        this._letters = alphabetPickerStyle => (
+            alphabet.map((letter) => <LetterPicker letter={letter} key={letter} alphabetPickerStyle={alphabetPickerStyle}/>)
         );
 
         return (
@@ -87,9 +87,9 @@ export default class AlphabetPicker extends Component {
                 ref='alphabetContainer'
                 {...this._panResponder.panHandlers}
                 onLayout={this._onLayout.bind(this)}
-                style={{ paddingHorizontal: 5, backgroundColor: '#fff', borderRadius: 1, justifyContent: 'center' }}>
+                style={{ paddingHorizontal: 5, backgroundColor: '#fff', borderRadius: 1, justifyContent: 'center', ...this.props.alphabetPickerStyle }}>
                 <View>
-                    {this._letters}
+                    {this._letters(this.props.alphabetPickerStyle)}
                 </View>
             </View>
         );
