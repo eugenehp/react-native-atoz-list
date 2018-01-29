@@ -81,14 +81,9 @@ export default class AtoZList extends Component {
       </View>
     );
 
-    const style = {
-      ...styles.container,
-      ...this.props.style,
-    };
-
     return (
       <View style={{flex: 1}}>
-        <View style={style}}>
+        <View style={[styles.container, this.props.style]}>
           <FixedHeightWindowedListView
             ref={view => this._listView = view}
             dataSource={this.state.dataSource}
