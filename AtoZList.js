@@ -90,7 +90,7 @@ export default class AtoZList extends Component {
             renderCell={this.props.renderCell}
             renderSectionHeader={this.props.renderSection}
             incrementDelay={16}
-            initialNumToRender={8}
+            initialNumToRender={this.props.initialNumToRender || 8}
             pageSize={Platform.OS === 'ios' ? 15 : 8}
             maxNumToRender={70}
             numToRenderAhead={40}
