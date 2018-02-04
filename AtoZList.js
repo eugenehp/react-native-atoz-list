@@ -71,12 +71,13 @@ export default class AtoZList extends Component {
 
 
   render() {
-    this._alphabetInstance = alphabetPickerStyle => (
+    this._alphabetInstance = (alphabetPickerStyle, textPickerStyle) => (
       <View style={styles.alphabetSidebar}>
         <AlphabetPicker
           alphabet={this.state.alphabet}
           onTouchLetter={this._onTouchLetter.bind(this)}
           alphabetPickerStyle={alphabetPickerStyle}
+          textPickerStyle={textPickerStyle}
         />
       </View>
     );
@@ -98,7 +99,7 @@ export default class AtoZList extends Component {
             onEndReached={this.props.onEndReached}
           />
         </View>
-        {this._alphabetInstance(this.props.alphabetPickerStyle)}
+        {this._alphabetInstance(this.props.alphabetPickerStyle, this.props.textPickerStyle)}
       </View>
     );
   }
