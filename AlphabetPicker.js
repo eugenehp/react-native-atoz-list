@@ -85,7 +85,7 @@ export default class AlphabetPicker extends Component {
                     letter={letter}
                     textPickerStyle={textPickerStyle}
                 />
-            )
+            ))
         );
 
         return (
