@@ -93,9 +93,9 @@ export default class AtoZList extends Component {
             incrementDelay={16}
             initialNumToRender={this.props.initialNumToRender || 8}
             pageSize={Platform.OS === 'ios' ? 15 : 8}
-            maxNumToRender={70}
-            numToRenderAhead={40}
-            numToRenderBehind={4}
+            maxNumToRender={this.props.maxNumToRender || 70}
+            numToRenderAhead={this.props.numToRenderAhead || 40}
+            numToRenderBehind={this.props.numToRenderBehind || 4}
             onEndReached={this.props.onEndReached}
           />
         </View>
