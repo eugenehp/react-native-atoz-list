@@ -55,7 +55,6 @@ export default class AlphabetPicker extends Component {
       }
 
     _onTouchLetter(letter) {
-        console.warn('_onTouchLetter', letter)
         letter && this.props.onTouchLetter && this.props.onTouchLetter(letter);
     }
 
