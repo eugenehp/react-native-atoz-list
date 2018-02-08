@@ -101,10 +101,11 @@ export default class AtoZList extends Component {
         </View>
         {this._alphabetInstance(this.props.alphabetPickerStyle, this.props.textPickerStyle)}
       </View>
-    );
+    );///
   }
 
   _onTouchLetter(letter) {
+    console.warn('_onTouchLetter', letter)
     this._listView.scrollToSectionBuffered(letter);
   }
 }
