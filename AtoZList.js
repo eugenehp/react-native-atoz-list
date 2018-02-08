@@ -105,7 +105,6 @@ export default class AtoZList extends Component {
   }
 
   _onTouchLetter(letter) {
-    console.warn('_onTouchLetter', letter)
     this._listView.scrollToSectionBuffered(letter);
   }
 }
