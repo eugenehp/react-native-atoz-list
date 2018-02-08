@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
-import { View, Text, PanResponder } from 'react-native';
+import { View, Text, PanResponder, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 
 class LetterPicker extends Component {
 
     render() {
+        const {letter} = this.props;
+
         return (
-            <Text style={{ fontSize: 11, fontWeight: 'bold', ...this.props.textPickerStyle }}>
-                {this.props.letter}
-            </Text>
-        );
+            <TouchableOpacity onPress={ () => this.props.onPress(letter)}>
+                <Text style={{ fontSize: 14, fontWeight: 'bold', ...this.props.textPickerStyle }}>
+                    {letter}
+                </Text>
+            </TouchableOpacity>
+        );///
     }
 }
 
@@ -25,25 +29,25 @@ export default class AlphabetPicker extends Component {
           };
     }
 
-    componentWillMount() {
-        this._panResponder = PanResponder.create({
-            onStartShouldSetPanResponder: () => true,
-            onMoveShouldSetPanResponder: () => true,
-            onPanResponderGrant: (e, gestureState) => {
-                this.props.onTouchStart && this.props.onTouchStart();
+    // componentWillMount() {
+    //     this._panResponder = PanResponder.create({
+    //         onStartShouldSetPanResponder: () => true,
+    //         onMoveShouldSetPanResponder: () => true,
+    //         onPanResponderGrant: (e, gestureState) => {
+    //             this.props.onTouchStart && this.props.onTouchStart();
 
-                this.tapTimeout = setTimeout(() => {
-                    this._onTouchLetter(this._findTouchedLetter(gestureState.y0));
-                }, 100);
-            },
-            onPanResponderMove: (evt, gestureState) => {
-                clearTimeout(this.tapTimeout);
-                this._onTouchLetter(this._findTouchedLetter(gestureState.moveY));
-            },
-            onPanResponderTerminate: this._onPanResponderEnd.bind(this),
-            onPanResponderRelease: this._onPanResponderEnd.bind(this),
-        });
-    }
+    //             this.tapTimeout = setTimeout(() => {
+    //                 this._onTouchLetter(this._findTouchedLetter(gestureState.y0));
+    //             }, 100);
+    //         },
+    //         onPanResponderMove: (evt, gestureState) => {
+    //             clearTimeout(this.tapTimeout);
+    //             this._onTouchLetter(this._findTouchedLetter(gestureState.moveY));
+    //         },
+    //         onPanResponderTerminate: this._onPanResponderEnd.bind(this),
+    //         onPanResponderRelease: this._onPanResponderEnd.bind(this),
+    //     });
+    // }
     componentWillReceiveProps(nextProps) {
         if(this.props.alphabet !== nextProps.alphabet){
             this.setState({alphabet:nextProps.alphabet})
@@ -51,6 +55,7 @@ export default class AlphabetPicker extends Component {
       }
 
     _onTouchLetter(letter) {
+        console.warn('_onTouchLetter', letter)
         letter && this.props.onTouchLetter && this.props.onTouchLetter(letter);
     }
 
@@ -84,14 +89,15 @@ export default class AlphabetPicker extends Component {
                     key={letter}
                     letter={letter}
                     textPickerStyle={textPickerStyle}
+                    onPress={this._onTouchLetter.bind(this)}
                 />
             ))
-        );
+        );///
 
         return (
             <View
                 ref='alphabetContainer'
-                {...this._panResponder.panHandlers}
+                
                 onLayout={this._onLayout.bind(this)}
                 style={{ paddingHorizontal: 5, backgroundColor: '#fff', borderRadius: 1, justifyContent: 'center', ...this.props.alphabetPickerStyle }}>
                 <View>
